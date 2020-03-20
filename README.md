@@ -1,5 +1,2 @@
-# demo-lab
-101
-1
-dd
-dd
+# Demo Lab Repository
+This is a demo lab repository the CvLabs
