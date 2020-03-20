@@ -1,0 +1,38 @@
+{
+  "kind": "lab",
+  "apiVersion": "1.0",
+  "subject": "cloud",
+  "slug": null,
+  "title": "My Lab",
+  "image": "/static/img/buzz-vlabs.png",
+  "status": "Draft",
+  "description": "This is a cool lab!",
+  "required_time": "30",
+  "lab_guide": "\n## Example Lab\n\nThis is an example lab guide. Please feel free to clean it and ceate your own content.\n\nWriting a lab guide in `Buzz vLabs` is fast and easy! You can quickly use Markdown to present rich contents in your lab guide.\n\nIn case you are not farmiliar with Markdown, please read through this guide, or check out the [GitHub Markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for a deepdive.\n\n#### Lab task 1: - Basics\n\nLet's explore how to use Markdown to write a simple guide here.\n\nYou can highline keyword `keyword`, make it bold **keyword**, or make it italic *keyword*.\n\nYou can include images in your lab guide like this:\n\n![Buzz vLabs](http://127.0.0.1:8000/static/img/buzzlabs-sm.png)\n\nThis is a good quote:\n\n> Look deep into nature, and then you will understand everything better.\n> `Albert Einstein`\n\n\nIf you want to present some code, you can do it like this\n\n    ls -l /\n\n#### Lab task 2: Playing with tokens    \n    \nYou can define mulitple lab environments in a lab, if you want to run the code in a one of the lab environment, you can put token `{cvlabs{env.your_env_slug}}` at the **first line** in your code block, the token will be picked up by Buzz vLabs during runtime. Following is an example:\n\n    {cvlabs{env.linux}}\n    ls -l /    \n    \nIf you want to reference the ip address of a lab environment, you can use token `{cvlabs{env.your_env_slug.ip}}` in your text or a code block.\n\n    connection = pika.BlockingConnection(pika.ConnectionParameters('{cvlabs{env.linux.ip}}'))\n    channel = connection.channel()\n    \nTo refernece a public serivce endpoind of your lab environment, please use following token. The token will be translated to a public domain name.\n\n    {cvlabs{env.linux.service}}\n\n#### Finish\n\nKeep up the good work and create some great labs for learners!     \n                ",
+  "updated_time": "2020-03-20T10:55:25.749Z",
+  "new_mode": true,
+  "grading_script": "        \n# You can define a shell script for auto grading.\n# For more tips on shell programming, please check out https://devhints.io/bash\nfunction env_linux(){\n    point=100\n    \n    if [[ $point -ge 90 ]]; then\n        echo A;\n    elif [[ $point -ge 80 ]]; then\n        echo B;\n    elif [[ $point -ge 70 ]]; then\n        echo C;\n    else \n        echo D;        \n    fi;\n}                           \n            ",
+  "web_hook_secret": "secret",
+  "web_hook_branch": "master",
+  "web_hook_input_url": "lab.json",
+  "environments": [
+    {
+      "name": "Linux",
+      "desc": "CentOS Linux",
+      "deployment": "\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  labels:\n  name: example\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n  strategy: {}\n  template:\n    metadata:\n      labels:\n    spec:\n      containers:\n      - command:\n        - bash\n        - -c\n        - \"echo PS1=lab#  >> /root/.bashrc;sleep 1d\"\n        image: centos\n        resources:\n          limits:\n            cpu: 500m\n            memory: 512Mi\n          requests:\n            cpu: 100m\n            memory: 512Mi\n        ports:\n        - containerPort: 80\n        name: centos\nstatus: {}\n",
+      "terminal_tab": true,
+      "public_endpoints": false,
+      "web_tab": false,
+      "url_param": null
+    },
+    {
+      "name": "Linux2",
+      "desc": "CentOS Linux",
+      "deployment": "\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  labels:\n  name: example\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n  strategy: {}\n  template:\n    metadata:\n      labels:\n    spec:\n      containers:\n      - command:\n        - bash\n        - -c\n        - \"echo PS1=lab#  >> /root/.bashrc;sleep 1d\"\n        image: centos\n        resources:\n          limits:\n            cpu: 500m\n            memory: 512Mi\n          requests:\n            cpu: 100m\n            memory: 512Mi\n        ports:\n        - containerPort: 80\n        name: centos\nstatus: {}\n",
+      "terminal_tab": true,
+      "public_endpoints": false,
+      "web_tab": false,
+      "url_param": null
+    }
+  ]
+}
