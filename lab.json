@@ -2,8 +2,8 @@
   "kind": "lab",
   "apiVersion": "1.0",
   "subject": "cloud",
-  "slug": "my-lab",
-  "title": "My Lab",
+  "slug": "my-lab2",
+  "title": "My Lab2",
   "image": "/static/img/buzz-vlabs.png",
   "status": "Draft",
   "description": "This is a cool lab!",
@@ -17,7 +17,7 @@
   "webhook_input_url": "lab.json",
   "environments": [
     {
-      "name": "Linux",
+      "name": "Linux2",
       "desc": "CentOS Linux",
       "deployment": "apiVersion: apps/v1\r\nkind: Deployment\r\nmetadata:\r\n  labels:\r\n  name: example\r\nspec:\r\n  replicas: 1\r\n  selector:\r\n    matchLabels:\r\n  strategy: {}\r\n  template:\r\n    metadata:\r\n      labels:\r\n    spec:\r\n      containers:\r\n      - command:\r\n        - bash\r\n        - -c\r\n        - \"echo PS1=lab#  >> /root/.bashrc;sleep 1d\"\r\n        image: centos\r\n        resources:\r\n          limits:\r\n            cpu: 500m\r\n            memory: 512Mi\r\n          requests:\r\n            cpu: 100m\r\n            memory: 512Mi\r\n        ports:\r\n        - containerPort: 80\r\n        name: centos\r\nstatus: {}",
       "terminal_tab": true,
