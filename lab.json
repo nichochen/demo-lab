@@ -2,37 +2,28 @@
   "kind": "lab",
   "apiVersion": "1.0",
   "subject": "cloud",
-  "slug": null,
+  "slug": "my-lab",
   "title": "My Lab",
   "image": "/static/img/buzz-vlabs.png",
   "status": "Draft",
   "description": "This is a cool lab!",
   "required_time": "30",
-  "lab_guide": "\n## Example Lab\n\nThis is an example lab guide. Please feel free to clean it and ceate your own content.\n\nWriting a lab guide in `Buzz vLabs` is fast and easy! You can quickly use Markdown to present rich contents in your lab guide.\n\nIn case you are not farmiliar with Markdown, please read through this guide, or check out the [GitHub Markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for a deepdive.\n\n#### Lab task 1: - Basics\n\nLet's explore how to use Markdown to write a simple guide here.\n\nYou can highline keyword `keyword`, make it bold **keyword**, or make it italic *keyword*.\n\nYou can include images in your lab guide like this:\n\n![Buzz vLabs](http://127.0.0.1:8000/static/img/buzzlabs-sm.png)\n\nThis is a good quote:\n\n> Look deep into nature, and then you will understand everything better.\n> `Albert Einstein`\n\n\nIf you want to present some code, you can do it like this\n\n    ls -l /\n\n#### Lab task 2: Playing with tokens    \n    \nYou can define mulitple lab environments in a lab, if you want to run the code in a one of the lab environment, you can put token `{cvlabs{env.your_env_slug}}` at the **first line** in your code block, the token will be picked up by Buzz vLabs during runtime. Following is an example:\n\n    {cvlabs{env.linux}}\n    ls -l /    \n    \nIf you want to reference the ip address of a lab environment, you can use token `{cvlabs{env.your_env_slug.ip}}` in your text or a code block.\n\n    connection = pika.BlockingConnection(pika.ConnectionParameters('{cvlabs{env.linux.ip}}'))\n    channel = connection.channel()\n    \nTo refernece a public serivce endpoind of your lab environment, please use following token. The token will be translated to a public domain name.\n\n    {cvlabs{env.linux.service}}\n\n#### Finish\n\nKeep up the good work and create some great labs for learners!     \n                ",
-  "updated_time": "2020-03-20T10:55:25.749Z",
-  "new_mode": true,
-  "grading_script": "      \n# You can define a shell script for auto grading.\n# For more tips on shell programming, please check out https://devhints.io/bash\nfunction env_linux(){\n    point=100\n    \n    if [[ $point -ge 90 ]]; then\n        echo A;\n    elif [[ $point -ge 80 ]]; then\n        echo B;\n    elif [[ $point -ge 70 ]]; then\n        echo C;\n    else \n        echo D;        \n    fi;\n}                           \n            ",
-  "web_hook_secret": "secret",
-  "web_hook_branch": "master",
-  "web_hook_input_url": "lab.json",
+  "lab_guide": "## Example Lab\r\n\r\nThis is an example lab guide. Please feel free to clean it and ceate your own content.\r\n\r\nWriting a lab guide in `Buzz vLabs` is fast and easy! You can quickly use Markdown to present rich contents in your lab guide.\r\n\r\nIn case you are not farmiliar with Markdown, please read through this guide, or check out the [GitHub Markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for a deepdive.\r\n\r\n#### Lab task 1: - Basics\r\n\r\nLet's explore how to use Markdown to write a simple guide here.\r\n\r\nYou can highline keyword `keyword`, make it bold **keyword**, or make it italic *keyword*.\r\n\r\nYou can include images in your lab guide like this:\r\n\r\n![Buzz vLabs](http://127.0.0.1:8000/static/img/buzzlabs-sm.png)\r\n\r\nThis is a good quote:\r\n\r\n> Look deep into nature, and then you will understand everything better.\r\n> `Albert Einstein`\r\n\r\n\r\nIf you want to present some code, you can do it like this\r\n\r\n    ls -l /\r\n\r\n#### Lab task 2: Playing with tokens    \r\n    \r\nYou can define mulitple lab environments in a lab, if you want to run the code in a one of the lab environment, you can put token `{cvlabs{env.your_env_slug}}` at the **first line** in your code block, the token will be picked up by Buzz vLabs during runtime. Following is an example:\r\n\r\n    {cvlabs{env.linux}}\r\n    ls -l /    \r\n    \r\nIf you want to reference the ip address of a lab environment, you can use token `{cvlabs{env.your_env_slug.ip}}` in your text or a code block.\r\n\r\n    connection = pika.BlockingConnection(pika.ConnectionParameters('{cvlabs{env.linux.ip}}'))\r\n    channel = connection.channel()\r\n    \r\nTo refernece a public serivce endpoind of your lab environment, please use following token. The token will be translated to a public domain name.\r\n\r\n    {cvlabs{env.linux.service}}\r\n\r\n#### Finish\r\n\r\nKeep up the good work and create some great labs for learners!",
+  "updated_time": "2020-03-20T14:15:38.070Z",
+  "new_mode": false,
+  "grading_script": "# You can define a shell script for auto grading.\r\n# For more tips on shell programming, please check out https://devhints.io/bash\r\nfunction env_linux(){\r\n    point=100\r\n    \r\n    if [[ $point -ge 90 ]]; then\r\n        echo A;\r\n    elif [[ $point -ge 80 ]]; then\r\n        echo B;\r\n    elif [[ $point -ge 70 ]]; then\r\n        echo C;\r\n    else \r\n        echo D;        \r\n    fi;\r\n}",
+  "webhook_secret": "test",
+  "webhook_branch": "dev",
+  "webhook_input_url": "lab.json",
   "environments": [
     {
       "name": "Linux",
       "desc": "CentOS Linux",
-      "deployment": "\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  labels:\n  name: example\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n  strategy: {}\n  template:\n    metadata:\n      labels:\n    spec:\n      containers:\n      - command:\n        - bash\n        - -c\n        - \"echo PS1=lab#  >> /root/.bashrc;sleep 1d\"\n        image: centos\n        resources:\n          limits:\n            cpu: 500m\n            memory: 512Mi\n          requests:\n            cpu: 100m\n            memory: 512Mi\n        ports:\n        - containerPort: 80\n        name: centos\nstatus: {}\n",
+      "deployment": "apiVersion: apps/v1\r\nkind: Deployment\r\nmetadata:\r\n  labels:\r\n  name: example\r\nspec:\r\n  replicas: 1\r\n  selector:\r\n    matchLabels:\r\n  strategy: {}\r\n  template:\r\n    metadata:\r\n      labels:\r\n    spec:\r\n      containers:\r\n      - command:\r\n        - bash\r\n        - -c\r\n        - \"echo PS1=lab#  >> /root/.bashrc;sleep 1d\"\r\n        image: centos\r\n        resources:\r\n          limits:\r\n            cpu: 500m\r\n            memory: 512Mi\r\n          requests:\r\n            cpu: 100m\r\n            memory: 512Mi\r\n        ports:\r\n        - containerPort: 80\r\n        name: centos\r\nstatus: {}",
       "terminal_tab": true,
       "public_endpoints": false,
       "web_tab": false,
-      "url_param": null
-    },
-    {
-      "name": "Linux2",
-      "desc": "CentOS Linux",
-      "deployment": "\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  labels:\n  name: example\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n  strategy: {}\n  template:\n    metadata:\n      labels:\n    spec:\n      containers:\n      - command:\n        - bash\n        - -c\n        - \"echo PS1=lab#  >> /root/.bashrc;sleep 1d\"\n        image: centos\n        resources:\n          limits:\n            cpu: 500m\n            memory: 512Mi\n          requests:\n            cpu: 100m\n            memory: 512Mi\n        ports:\n        - containerPort: 80\n        name: centos\nstatus: {}\n",
-      "terminal_tab": true,
-      "public_endpoints": false,
-      "web_tab": false,
-      "url_param": null
+      "url_param": ""
     }
   ]
 }
